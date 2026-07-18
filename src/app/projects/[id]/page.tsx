@@ -44,7 +44,7 @@ export default async function ProjectDetailPage({
   return (
     <div className="mx-auto max-w-[1800px] px-8 pb-24 lg:px-14">
       <TopBar
-        crumbs={[{ label: "Projects", href: "/" }, { label: project.name }]}
+        crumbs={[{ label: "Projects", href: "/projects" }, { label: project.name }]}
         right={
           <div className="flex items-center gap-4">
             <ThemeToggle />

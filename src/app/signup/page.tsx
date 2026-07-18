@@ -31,7 +31,7 @@ export default function SignupPage() {
 
     if (data.session) {
       // Email confirmation is disabled — signUp already returned a live session.
-      router.push("/");
+      router.push("/projects");
       router.refresh();
       return;
     }

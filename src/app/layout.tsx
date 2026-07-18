@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Newsreader } from "next/font/google";
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/lib/theme";
 import "./globals.css";
@@ -15,9 +15,15 @@ const newsreader = Newsreader({
   style: ["normal", "italic"],
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Smith",
-  description: "Keep your agents aligned with the intent you gave them.",
+  title: "Agent Smith — a goal-fidelity watchdog for AI coding agents",
+  description:
+    "You tell Smith your project's goal once. He watches every risky move your AI coding agent makes from then on, and keeps score of how well you stuck to it.",
 };
 
 const themeInitScript = `
@@ -32,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${newsreader.variable} h-full antialiased`}
+      className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

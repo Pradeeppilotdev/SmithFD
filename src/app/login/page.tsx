@@ -33,7 +33,7 @@ export default function LoginPage() {
       setError(error.message);
       return;
     }
-    router.push("/");
+    router.push("/projects");
     router.refresh();
   }
 

@@ -47,6 +47,11 @@
   --sidebar-accent-foreground: #1a1a18;
   --sidebar-border: #ecebe6;
   --sidebar-ring: #a3a29b;
+  /* Landing: the terminal's in-world CRT green, and the sweep accent. */
+  --phosphor: #7fdca4;
+  --signal: #9a6b15;
+  --terminal-bg: #14140f;
+  --terminal-fg: #d8d2c4;
 }
 
 .dark {
@@ -91,6 +96,10 @@
   --sidebar-accent-foreground: #e3ddd3;
   --sidebar-border: #2e2c28;
   --sidebar-ring: #6b655a;
+  --phosphor: #7fdca4;
+  --signal: #d4a351;
+  --terminal-bg: #14140f;
+  --terminal-fg: #d8d2c4;
 }
 
 @theme inline {
@@ -138,6 +147,9 @@
   --font-sans: var(--font-inter);
   --font-serif: var(--font-newsreader);
   --font-heading: var(--font-newsreader);
+  --font-mono: var(--font-jetbrains);
+  --color-phosphor: var(--phosphor);
+  --color-signal: var(--signal);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -197,4 +209,118 @@
   );
   background-size: 250% 100%;
   animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   Landing page — pixel layer
+
+   Everything below is scoped to the marketing page. The app itself stays soft
+   and papery; the landing borrows a coarse 4px pixel grid to stand for the
+   watchdog's sampling of your agent's actions.
+   --------------------------------------------------------------------------- */
+
+.pixel-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--border-strong), transparent 45%) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--border-strong), transparent 45%) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Fades the grid out toward the edges so it reads as texture, not a table. */
+.pixel-grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 38%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 38%, #000 30%, transparent 100%);
+}
+
+.pixel-edge {
+  border-radius: 2px;
+}
+
+/* Hard 4px stair-stepped corners — a pixel-art bevel, no border-radius. */
+.pixel-corner {
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    color-mix(in oklab, #000, transparent 88%) 0px,
+    color-mix(in oklab, #000, transparent 88%) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@keyframes pixel-caret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.pixel-caret {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  vertical-align: -2px;
+  background: var(--phosphor);
+  animation: pixel-caret 1.05s steps(1) infinite;
+}
+
+@keyframes sweep-down {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(400%); }
+}
+
+.sweep-line {
+  animation: sweep-down 5.5s linear infinite;
+}
+
+@keyframes pixel-flicker {
+  0%, 100% { opacity: 0.16; }
+  22% { opacity: 0.5; }
+  44% { opacity: 0.1; }
+  71% { opacity: 0.38; }
+}
+
+.pixel-flicker {
+  animation: pixel-flicker 3.4s steps(3, end) infinite;
+}
+
+/* Scroll-reveal: elements start displaced, JS flips data-shown when in view. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep-line,
+  .pixel-flicker,
+  .pixel-caret,
+  .skeleton-shimmer {
+    animation: none;
+  }
+  .pixel-caret {
+    opacity: 1;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

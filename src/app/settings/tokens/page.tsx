@@ -15,7 +15,7 @@ export default async function TokensPage() {
     <div className="mx-auto max-w-[960px] px-8 pb-24 lg:px-14">
       <TopBar
         showLogo
-        crumbs={[{ label: "Projects", href: "/" }, { label: "Access tokens" }]}
+        crumbs={[{ label: "Projects", href: "/projects" }, { label: "Access tokens" }]}
         right={
           <div className="flex items-center gap-4">
             <ThemeToggle />
