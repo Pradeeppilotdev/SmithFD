@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { OAuthButtons, OrDivider } from "@/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
@@ -12,6 +13,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("error") === "oauth_failed") {
+      setError("That sign-in didn't go through. Please try again.");
+    }
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -40,12 +47,14 @@ export default function LoginPage() {
         Sign in
       </h1>
 
+      <OAuthButtons />
+      <OrDivider />
+
       <form onSubmit={handleSubmit} className="space-y-3.5">
         <div className="flex h-[46px] items-center rounded-[12px] border border-border-strong bg-card px-4 focus-within:border-faint">
           <input
             type="email"
             required
-            autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"

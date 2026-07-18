@@ -12,7 +12,7 @@ export default async function TokensPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <div className="mx-auto max-w-[720px] px-8 pb-24">
+    <div className="mx-auto max-w-[960px] px-8 pb-24 lg:px-14">
       <TopBar
         showLogo
         crumbs={[{ label: "Projects", href: "/" }, { label: "Access tokens" }]}

@@ -42,7 +42,7 @@ export default async function ProjectDetailPage({
   const score = computeScore(flaggedCount, overriddenCount);
 
   return (
-    <div className="mx-auto max-w-[1120px] px-8 pb-24">
+    <div className="mx-auto max-w-[1800px] px-8 pb-24 lg:px-14">
       <TopBar
         crumbs={[{ label: "Projects", href: "/" }, { label: project.name }]}
         right={

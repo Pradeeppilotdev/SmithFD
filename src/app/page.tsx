@@ -38,7 +38,7 @@ export default async function ProjectsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-[1400px] px-8 pb-24">
+    <div className="mx-auto max-w-[1800px] px-8 pb-24 lg:px-14">
       <TopBar
         showLogo
         crumbs={[{ label: "Projects" }]}

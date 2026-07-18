@@ -2,10 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { OAuthButtons, OrDivider } from "@/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -18,11 +21,18 @@ export default function SignupPage() {
     setLoading(true);
 
     const supabase = createClient();
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({ email, password });
 
     setLoading(false);
     if (error) {
       setError(error.message);
+      return;
+    }
+
+    if (data.session) {
+      // Email confirmation is disabled — signUp already returned a live session.
+      router.push("/");
+      router.refresh();
       return;
     }
     setDone(true);
@@ -60,12 +70,14 @@ export default function SignupPage() {
         Create your account
       </h1>
 
+      <OAuthButtons />
+      <OrDivider />
+
       <form onSubmit={handleSubmit} className="space-y-3.5">
         <div className="flex h-[46px] items-center rounded-[12px] border border-border-strong bg-card px-4 focus-within:border-faint">
           <input
             type="email"
             required
-            autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
