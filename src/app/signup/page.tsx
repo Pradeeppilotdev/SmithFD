@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { AuthShell } from "@/components/AuthShell";
 import { OAuthButtons, OrDivider } from "@/components/OAuthButtons";
 import { createClient } from "@/lib/supabase/client";
 
@@ -40,12 +41,8 @@ export default function SignupPage() {
 
   if (done) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-sm flex-col justify-center px-6">
-        <div className="mb-2 flex items-center gap-2 text-[15px] font-semibold tracking-tight">
-          <span className="size-2 rounded-full bg-foreground" />
-          Smith
-        </div>
-        <h1 className="mb-3 font-serif text-[26px] leading-[1.25] font-medium tracking-[-0.2px] text-foreground">
+      <AuthShell rail="confirm">
+        <h1 className="mb-3 font-serif text-[28px] leading-[1.2] font-medium tracking-[-0.2px] text-foreground">
           Check your email
         </h1>
         <p className="text-[13.5px] leading-relaxed text-muted-foreground">
@@ -56,19 +53,22 @@ export default function SignupPage() {
           </Link>
           .
         </p>
-      </div>
+      </AuthShell>
     );
   }
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-sm flex-col justify-center px-6">
-      <div className="mb-2 flex items-center gap-2 text-[15px] font-semibold tracking-tight">
-        <span className="size-2 rounded-full bg-foreground" />
-        Smith
-      </div>
-      <h1 className="mb-7 font-serif text-[26px] leading-[1.25] font-medium tracking-[-0.2px] text-foreground">
+    <AuthShell rail="sign up">
+      <h1 className="mb-2 font-serif text-[28px] leading-[1.2] font-medium tracking-[-0.2px] text-foreground">
         Create your account
       </h1>
+      <p className="mb-8 text-[13.5px] leading-relaxed text-muted-foreground">
+        One account tracks every project you run{" "}
+        <code className="rounded-[5px] bg-muted px-1.5 py-0.5 font-mono text-[12.5px]">
+          smith init
+        </code>{" "}
+        in.
+      </p>
 
       <OAuthButtons />
       <OrDivider />
@@ -113,6 +113,6 @@ export default function SignupPage() {
           Sign in
         </Link>
       </p>
-    </div>
+    </AuthShell>
   );
 }
