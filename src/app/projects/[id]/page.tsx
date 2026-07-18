@@ -60,10 +60,10 @@ export default async function ProjectDetailPage({
         <div className="pt-11">
           <p className="eyebrow mb-3.5">Declared goal</p>
           <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:justify-between sm:gap-6">
-            <p className="max-w-3xl font-serif text-[20px] leading-relaxed font-medium text-foreground">
+            <p className="min-w-0 max-w-3xl flex-1 font-serif text-[20px] leading-relaxed font-medium text-foreground">
               {project.goal || "No goal declared yet."}
             </p>
-            <div className="flex flex-col items-start gap-2 sm:items-end">
+            <div className="flex shrink-0 flex-col items-start gap-2 sm:items-end">
               <ScoreBadge score={score} />
               <ScoreProgress flagged={flaggedCount} overridden={overriddenCount} />
             </div>

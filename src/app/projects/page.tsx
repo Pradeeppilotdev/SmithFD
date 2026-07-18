@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { KeyRound } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SignOutButton } from "@/components/SignOutButton";
@@ -51,8 +52,13 @@ export default async function ProjectsPage() {
           right={
             <div className="flex items-center gap-3 sm:gap-4">
               <ThemeToggle />
-              <Link href="/settings/tokens" className="text-[13px] text-faint hover:text-muted-foreground">
-                Access tokens
+              <Link
+                href="/settings/tokens"
+                aria-label="Access tokens"
+                className="flex items-center gap-1.5 text-[13px] text-faint hover:text-muted-foreground"
+              >
+                <KeyRound className="size-3.5 shrink-0" />
+                <span className="hidden sm:inline">Access tokens</span>
               </Link>
               <SignOutButton />
             </div>

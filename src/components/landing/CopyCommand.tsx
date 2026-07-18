@@ -40,8 +40,8 @@ export function CopyCommand({
         className,
       )}
     >
-      <span className="text-faint select-none">$</span>
-      <span className="truncate">{command}</span>
+      <span className="shrink-0 text-faint select-none">$</span>
+      <span className="min-w-0 flex-1 truncate">{command}</span>
       {copied ? (
         <Check className="size-3.5 shrink-0 text-success" />
       ) : (

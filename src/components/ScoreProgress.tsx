@@ -16,8 +16,8 @@ export function ScoreProgress({
   const keptPct = Math.round((kept / flagged) * 100);
 
   return (
-    <div className="flex items-center gap-2.5">
-      <div className="h-1.5 w-full max-w-[160px] shrink-0 overflow-hidden rounded-full bg-destructive/20">
+    <div className="w-full max-w-[200px]">
+      <div className="mb-1.5 h-1.5 w-full overflow-hidden rounded-full bg-destructive/20">
         <div
           className="h-full rounded-full bg-success transition-[width]"
           style={{ width: `${keptPct}%` }}

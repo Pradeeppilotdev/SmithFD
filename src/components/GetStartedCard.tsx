@@ -82,7 +82,7 @@ export function GetStartedCard() {
             <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary text-[12px] font-semibold text-secondary-foreground">
               {i + 1}
             </span>
-            <div>
+            <div className="min-w-0 flex-1">
               <p className="mb-0.5 text-[13.5px] font-medium text-foreground">{step.title}</p>
               <div className="text-[13px] leading-relaxed text-muted-foreground">{step.body}</div>
             </div>
