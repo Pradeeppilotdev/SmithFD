@@ -5,14 +5,16 @@ function Stat({
 }: {
   value: React.ReactNode;
   label: string;
-  tone?: "destructive" | "warning";
+  tone?: "destructive" | "warning" | "success";
 }) {
   const toneClass =
     tone === "destructive"
       ? "text-destructive"
       : tone === "warning"
         ? "text-warning"
-        : "text-foreground";
+        : tone === "success"
+          ? "text-success"
+          : "text-foreground";
 
   return (
     <div className="flex items-baseline gap-2">
@@ -23,22 +25,15 @@ function Stat({
 }
 
 export function QuietStats({
-  flagged,
-  awaiting,
-  resolved,
-  session,
+  stats,
 }: {
-  flagged: number;
-  awaiting: number;
-  resolved: number;
-  session: React.ReactNode;
+  stats: { value: React.ReactNode; label: string; tone?: "destructive" | "warning" | "success" }[];
 }) {
   return (
     <div className="mb-14 flex flex-wrap gap-11 border-t border-b border-border py-5.5">
-      <Stat value={flagged} label="drift events" tone="destructive" />
-      <Stat value={awaiting} label="awaiting decision" tone="warning" />
-      <Stat value={resolved} label="resolved" />
-      <Stat value={session} label="session" />
+      {stats.map((stat) => (
+        <Stat key={stat.label} {...stat} />
+      ))}
     </div>
   );
 }

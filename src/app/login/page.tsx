@@ -1,0 +1,85 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/client";
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    setLoading(false);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    router.push("/");
+    router.refresh();
+  }
+
+  return (
+    <div className="mx-auto flex min-h-screen max-w-sm flex-col justify-center px-6">
+      <div className="mb-2 flex items-center gap-2 text-[15px] font-semibold tracking-tight">
+        <span className="size-2 rounded-full bg-foreground" />
+        Smith
+      </div>
+      <h1 className="mb-7 font-serif text-[26px] leading-[1.25] font-medium tracking-[-0.2px] text-foreground">
+        Sign in
+      </h1>
+
+      <form onSubmit={handleSubmit} className="space-y-3.5">
+        <div className="flex h-[46px] items-center rounded-[12px] border border-border-strong bg-card px-4 focus-within:border-faint">
+          <input
+            type="email"
+            required
+            autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            className="w-full border-none bg-transparent text-sm text-foreground placeholder:text-faint focus:outline-none"
+          />
+        </div>
+        <div className="flex h-[46px] items-center rounded-[12px] border border-border-strong bg-card px-4 focus-within:border-faint">
+          <input
+            type="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            className="w-full border-none bg-transparent text-sm text-foreground placeholder:text-faint focus:outline-none"
+          />
+        </div>
+
+        {error && <p className="text-[13px] text-destructive">{error}</p>}
+
+        <Button
+          type="submit"
+          disabled={loading}
+          className="h-auto w-full rounded-[10px] py-3 text-[13.5px]"
+        >
+          {loading ? "Signing in…" : "Sign in"}
+        </Button>
+      </form>
+
+      <p className="mt-6 text-[13px] text-faint">
+        Don&apos;t have an account?{" "}
+        <Link href="/signup" className="text-muted-foreground hover:underline">
+          Sign up
+        </Link>
+      </p>
+    </div>
+  );
+}
