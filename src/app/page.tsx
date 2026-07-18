@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, GitBranch } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { CopyCommand } from "@/components/landing/CopyCommand";
+import { MobileNav } from "@/components/landing/MobileNav";
 import { PixelSweep } from "@/components/landing/PixelSweep";
 import { Reveal } from "@/components/landing/Reveal";
 import { ScoreMeter } from "@/components/landing/ScoreMeter";
@@ -109,7 +110,7 @@ export default async function LandingPage() {
       {/* Nav                                                                 */}
       {/* ------------------------------------------------------------------ */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1240px] items-center justify-between px-6 py-3.5 lg:px-10">
+        <div className="mx-auto flex max-w-[1240px] items-center justify-between px-4 py-3.5 sm:px-6 lg:px-10">
           <Link href="/" className="flex items-center gap-2.5">
             <span className="size-2.5 bg-foreground" />
             <span className="font-mono text-[13px] font-semibold tracking-[0.06em] text-foreground uppercase">
@@ -146,6 +147,7 @@ export default async function LandingPage() {
               {signedIn ? "Dashboard" : "Sign in"}
               <ArrowRight className="size-3.5" />
             </Link>
+            <MobileNav githubUrl={GITHUB_URL} />
           </div>
         </div>
       </header>

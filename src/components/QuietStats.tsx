@@ -30,7 +30,7 @@ export function QuietStats({
   stats: { value: React.ReactNode; label: string; tone?: "destructive" | "warning" | "success" }[];
 }) {
   return (
-    <div className="mb-14 flex flex-wrap gap-11 border-t border-b border-border py-5.5">
+    <div className="mb-14 flex flex-wrap gap-x-7 gap-y-3 border-t border-b border-border py-5.5 sm:gap-x-11">
       {stats.map((stat) => (
         <Stat key={stat.label} {...stat} />
       ))}

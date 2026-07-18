@@ -57,8 +57,8 @@ export function TokensPanel({ initialTokens }: { initialTokens: TokenRow[] }) {
 
   return (
     <div>
-      <div className="mb-3.5 flex gap-2">
-        <div className="flex h-[42px] flex-1 max-w-xs items-center rounded-[10px] border border-border-strong bg-card px-3.5">
+      <div className="mb-3.5 flex flex-col gap-2 sm:flex-row">
+        <div className="flex h-[42px] flex-1 items-center rounded-[10px] border border-border-strong bg-card px-3.5 sm:max-w-xs">
           <input
             value={label}
             onChange={(e) => setLabel(e.target.value)}
@@ -69,7 +69,7 @@ export function TokensPanel({ initialTokens }: { initialTokens: TokenRow[] }) {
         <Button
           onClick={generate}
           disabled={generating}
-          className="h-auto rounded-[10px] px-4 py-2.5 text-[13px]"
+          className="h-auto w-full rounded-[10px] px-4 py-2.5 text-[13px] sm:w-auto"
         >
           {generating ? "Generating…" : "Generate token"}
         </Button>
@@ -104,8 +104,8 @@ export function TokensPanel({ initialTokens }: { initialTokens: TokenRow[] }) {
             key={token.id}
             className="flex items-center justify-between gap-4 rounded-[12px] border border-border bg-card px-4.5 py-3.5"
           >
-            <div>
-              <p className="text-[13.5px] font-medium text-foreground">
+            <div className="min-w-0">
+              <p className="truncate text-[13.5px] font-medium text-foreground">
                 {token.label || "Untitled token"}
               </p>
               <p className="text-[12px] text-faint">
@@ -120,7 +120,7 @@ export function TokensPanel({ initialTokens }: { initialTokens: TokenRow[] }) {
               <Button
                 variant="outline"
                 onClick={() => revoke(token.id)}
-                className="h-auto rounded-[8px] px-3 py-1.5 text-xs"
+                className="h-auto shrink-0 rounded-[8px] px-3 py-1.5 text-xs"
               >
                 Revoke
               </Button>
