@@ -3,6 +3,7 @@ import { TopBar } from "@/components/TopBar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SignOutButton } from "@/components/SignOutButton";
 import { ScoreBadge } from "@/components/ScoreBadge";
+import { ScoreProgress } from "@/components/ScoreProgress";
 import { QuietStats } from "@/components/QuietStats";
 import { RelativeTime } from "@/components/RelativeTime";
 import { Badge } from "@/components/Pill";
@@ -45,7 +46,7 @@ export default async function ProjectDetailPage({
   return (
     <div className="relative min-h-screen">
       <PixelGridBackdrop />
-      <div className="relative z-10 mx-auto max-w-[1800px] border-x border-border bg-background px-4 pb-24 sm:px-8 lg:px-14">
+      <div className="relative z-10 mx-auto max-w-[1800px] px-4 pb-24 sm:px-8 lg:px-14">
         <TopBar
           crumbs={[{ label: "Projects", href: "/projects" }, { label: project.name }]}
           right={
@@ -62,7 +63,10 @@ export default async function ProjectDetailPage({
             <p className="max-w-3xl font-serif text-[20px] leading-relaxed font-medium text-foreground">
               {project.goal || "No goal declared yet."}
             </p>
-            <ScoreBadge score={score} />
+            <div className="flex flex-col items-start gap-2 sm:items-end">
+              <ScoreBadge score={score} />
+              <ScoreProgress flagged={flaggedCount} overridden={overriddenCount} />
+            </div>
           </div>
 
           <QuietStats

@@ -15,7 +15,7 @@ export default async function TokensPage() {
   return (
     <div className="relative min-h-screen">
       <PixelGridBackdrop />
-      <div className="relative z-10 mx-auto max-w-[960px] border-x border-border bg-background px-4 pb-24 sm:px-8 lg:px-14">
+      <div className="relative z-10 mx-auto max-w-[960px] px-4 pb-24 sm:px-8 lg:px-14">
         <TopBar
           showLogo
           crumbs={[{ label: "Projects", href: "/projects" }, { label: "Access tokens" }]}

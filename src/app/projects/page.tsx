@@ -3,6 +3,7 @@ import { TopBar } from "@/components/TopBar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SignOutButton } from "@/components/SignOutButton";
 import { ScoreBadge } from "@/components/ScoreBadge";
+import { ScoreProgress } from "@/components/ScoreProgress";
 import { RelativeTime } from "@/components/RelativeTime";
 import { GetStartedCard } from "@/components/GetStartedCard";
 import { PixelGridBackdrop } from "@/components/PixelGridBackdrop";
@@ -43,7 +44,7 @@ export default async function ProjectsPage() {
   return (
     <div className="relative min-h-screen">
       <PixelGridBackdrop />
-      <div className="relative z-10 mx-auto max-w-[1800px] border-x border-border bg-background px-4 pb-24 sm:px-8 lg:px-14">
+      <div className="relative z-10 mx-auto max-w-[1800px] px-4 pb-24 sm:px-8 lg:px-14">
         <TopBar
           showLogo
           crumbs={[{ label: "Projects" }]}
@@ -60,9 +61,8 @@ export default async function ProjectsPage() {
 
         <div className="pt-11">
           {!projects || projects.length === 0 ? (
-            !hasGeneratedToken ? (
-              <GetStartedCard />
-            ) : (
+            <div className="space-y-4">
+              {!hasGeneratedToken && <GetStartedCard />}
               <div className="rounded-[14px] border border-border bg-card p-8">
                 <p className="mb-2 font-serif text-[20px] font-medium text-foreground">
                   No projects yet
@@ -74,14 +74,13 @@ export default async function ProjectsPage() {
                   registers them.
                 </p>
               </div>
-            )
+            </div>
           ) : (
             <div className="space-y-3">
               {projects.map((project) => {
-                const score = computeScore(
-                  flaggedByProject.get(project.id) ?? 0,
-                  overriddenByProject.get(project.id) ?? 0,
-                );
+                const flagged = flaggedByProject.get(project.id) ?? 0;
+                const overridden = overriddenByProject.get(project.id) ?? 0;
+                const score = computeScore(flagged, overridden);
                 return (
                   <Link
                     key={project.id}
@@ -99,6 +98,9 @@ export default async function ProjectsPage() {
                     <p className="mb-3 max-w-2xl truncate text-[13.5px] text-muted-foreground">
                       {project.goal || "No goal declared yet."}
                     </p>
+                    <div className="mb-3">
+                      <ScoreProgress flagged={flagged} overridden={overridden} />
+                    </div>
                     <p className="text-[12.5px] text-faint">
                       {project.last_synced_at ? (
                         <>
