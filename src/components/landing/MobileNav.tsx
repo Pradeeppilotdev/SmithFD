@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const LINKS = [
@@ -42,6 +43,9 @@ export function MobileNav({ githubUrl }: { githubUrl: string }) {
                 {link.label}
               </a>
             ))}
+            <Link href="/docs/cli" onClick={() => setOpen(false)} className="transition-colors hover:text-foreground">
+              CLI reference
+            </Link>
             <a
               href={githubUrl}
               target="_blank"

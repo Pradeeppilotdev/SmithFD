@@ -128,6 +128,9 @@ export default async function LandingPage() {
             <a href="#features" className="transition-colors hover:text-foreground">
               Features
             </a>
+            <Link href="/docs/cli" className="transition-colors hover:text-foreground">
+              CLI reference
+            </Link>
             <a
               href={GITHUB_URL}
               target="_blank"
@@ -421,6 +424,9 @@ export default async function LandingPage() {
             <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-foreground">
               GitHub
             </a>
+            <Link href="/docs/cli" className="hover:text-foreground">
+              CLI reference
+            </Link>
             <Link href={ctaHref} className="hover:text-foreground">
               Dashboard
             </Link>

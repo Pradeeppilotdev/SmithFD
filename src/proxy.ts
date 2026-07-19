@@ -2,9 +2,11 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/lib/supabase/database.types";
 
-// Routes reachable without a session. "/" is the marketing landing page and is
-// public to everyone; the auth pages bounce signed-in users to the dashboard.
+// Routes reachable without a session. "/" is the marketing landing page and
+// "/docs" is public reference documentation; both are public to everyone.
+// The auth pages bounce signed-in users to the dashboard.
 const AUTH_ROUTES = ["/login", "/signup"];
+const PUBLIC_ROUTES = ["/docs"];
 const DASHBOARD_PATH = "/projects";
 
 export async function proxy(request: NextRequest) {
@@ -36,8 +38,9 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAuthRoute = AUTH_ROUTES.some((route) => pathname.startsWith(route));
   const isLanding = pathname === "/";
+  const isPublicRoute = PUBLIC_ROUTES.some((route) => pathname.startsWith(route));
 
-  if (!user && !isAuthRoute && !isLanding) {
+  if (!user && !isAuthRoute && !isLanding && !isPublicRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
