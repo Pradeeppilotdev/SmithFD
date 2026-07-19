@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { KeyRound } from "lucide-react";
+import { BookOpen, KeyRound } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SignOutButton } from "@/components/SignOutButton";
@@ -52,6 +52,14 @@ export default async function ProjectsPage() {
           right={
             <div className="flex items-center gap-3 sm:gap-4">
               <ThemeToggle />
+              <Link
+                href="/docs/cli"
+                aria-label="CLI reference"
+                className="flex items-center gap-1.5 text-[13px] text-faint hover:text-muted-foreground"
+              >
+                <BookOpen className="size-3.5 shrink-0" />
+                <span className="hidden sm:inline">CLI reference</span>
+              </Link>
               <Link
                 href="/settings/tokens"
                 aria-label="Access tokens"
