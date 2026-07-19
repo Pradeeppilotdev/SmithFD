@@ -71,6 +71,12 @@ const FEATURES = [
   },
 ];
 
+const CLI_COMMANDS_PREVIEW = [
+  { command: "smith init", body: "Set the goal, install hooks, start watching." },
+  { command: "smith status", body: "Goal, Consistency Score, flagged history." },
+  { command: "smith argue", body: "Contest a flag or force a goal revision." },
+];
+
 const STACK = [
   { name: "Node.js", role: "CLI, terminal chat, watchdog server" },
   { name: "Express", role: "the local /analyze endpoint hooks call into" },
@@ -374,6 +380,50 @@ export default async function LandingPage() {
                 </div>
               ))}
             </dl>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------------ */}
+      {/* CLI reference                                                       */}
+      {/* ------------------------------------------------------------------ */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="pixel-grid pixel-grid-fade absolute inset-0" aria-hidden="true" />
+        <div className="relative mx-auto max-w-[1240px] px-6 py-20 lg:px-10 lg:py-28">
+          <Reveal>
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1fr] lg:items-center lg:gap-20">
+              <div>
+                <p className="eyebrow mb-4">For the terminal</p>
+                <h2 className="mb-6 font-serif text-[30px] leading-[1.18] font-medium tracking-[-0.015em] text-foreground sm:text-[38px]">
+                  Every command, one page.
+                </h2>
+                <p className="mb-8 max-w-[46ch] text-[15.5px] leading-[1.7] text-muted-foreground">
+                  The full command list, which ones talk to the dashboard, and the API contract
+                  underneath it all — laid out in the CLI reference.
+                </p>
+                <Link
+                  href="/docs/cli"
+                  className="pixel-edge inline-flex min-w-0 items-center gap-2 border border-border-strong bg-card px-5 py-3 text-[13.5px] font-medium text-foreground transition-colors hover:border-faint"
+                >
+                  Open the CLI reference
+                  <ArrowRight className="size-3.5 shrink-0" />
+                </Link>
+              </div>
+
+              <div className="min-w-0 divide-y divide-border border-y border-border font-mono text-[13px]">
+                {CLI_COMMANDS_PREVIEW.map((row) => (
+                  <div
+                    key={row.command}
+                    className="flex flex-col gap-1 py-3.5 sm:flex-row sm:items-baseline sm:gap-6"
+                  >
+                    <span className="shrink-0 font-medium text-foreground sm:w-[150px]">
+                      {row.command}
+                    </span>
+                    <span className="min-w-0 text-[12.5px] text-faint">{row.body}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
