@@ -36,7 +36,7 @@ export function CopyCommand({
       onClick={copy}
       aria-label={copied ? "Command copied" : `Copy ${command}`}
       className={cn(
-        "pixel-edge group flex items-center gap-3 border border-border-strong bg-card px-4 py-3 font-mono text-[13px] text-muted-foreground transition-colors hover:border-faint hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+        "pixel-edge group flex min-w-0 items-center gap-3 border border-border-strong bg-card px-4 py-3 font-mono text-[13px] text-muted-foreground transition-colors hover:border-faint hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         className,
       )}
     >

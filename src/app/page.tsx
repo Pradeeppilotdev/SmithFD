@@ -161,7 +161,7 @@ export default async function LandingPage() {
           <PixelSweep />
         </div>
 
-        <div className="relative mx-auto grid max-w-[1240px] items-center gap-14 px-6 pt-20 pb-24 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:px-10 lg:pt-28 lg:pb-32">
+        <div className="relative mx-auto grid max-w-[1240px] grid-cols-1 items-center gap-14 px-6 pt-20 pb-24 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:px-10 lg:pt-28 lg:pb-32">
           <div>
             <p className="eyebrow mb-6 flex items-center gap-2.5">
               <span className="pixel-flicker size-1.5 bg-signal" />
